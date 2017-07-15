@@ -1,47 +1,32 @@
+import React from "react";
+import { createRootNavigator } from "./router";
+import { isSignedIn } from "./auth";
 
-import React from 'react';
-import { Button, Platform, ScrollView, StyleSheet } from 'react-native';
-import { DrawerNavigator } from 'react-navigation';
-// import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import MyNavScreen from './MyNavScreen';
-import Home from './Home';
-import Drafts from './Drafts';
+export default class App extends React.Component {
+  constructor(props) {
+    super(props);
 
-
-Home.navigationOptions = {
-  drawerLabel: 'Home',
-};
-
-// const DraftsScreen = ({ navigation }) => (
-//   <MyNavScreen banner={'Drafts Screen'} navigation={navigation} />
-// );
-Drafts.navigationOptions = {
-  drawerLabel: 'Drafts',
-};
-
-const App = DrawerNavigator(
-  {
-    Home: {
-      path: '/',
-      screen: Home,
-    },
-    Drafts: {
-      path: '/sent',
-      screen: Drafts,
-    },
-  },
-  {
-    initialRouteName: 'Drafts',
-    contentOptions: {
-      activeTintColor: '#e91e63',
-    },
+    this.state = {
+      signedIn: false,
+      checkedSignIn: false
+    };
   }
-);
 
-const styles = StyleSheet.create({
-  container: {
-    marginTop: Platform.OS === 'ios' ? 20 : 0,
-  },
-});
+  componentWillMount() {
+    isSignedIn()
+      .then(res => this.setState({ signedIn: res, checkedSignIn: true }))
+      .catch(err => alert("An error occurred"));
+  }
 
-export default App;
+  render() {
+    const { checkedSignIn, signedIn } = this.state;
+
+    // If we haven't checked AsyncStorage yet, don't render anything (better ways to do this)
+    if (!checkedSignIn) {
+      return null;
+    }
+
+    const Layout = createRootNavigator(signedIn);
+    return <Layout />;
+  }
+}

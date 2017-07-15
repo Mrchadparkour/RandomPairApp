@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button, Platform, ScrollView, StyleSheet, Text } from 'react-native';
+import { onSignOut } from "../auth";
 
 export default class MyNavScreen extends React.Component {
   constructor() {
@@ -17,6 +18,9 @@ export default class MyNavScreen extends React.Component {
           title="Open drawer"
         />
         <Button onPress={() => goBack(null)} title="Go back" />
+        <Button backgroundColor="#03A9F4" title="SIGN OUT"
+        onPress={() => onSignOut().then(() => navigate("SignedOut"))}
+/>
       </ScrollView>
     );
   }
