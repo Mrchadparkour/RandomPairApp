@@ -1,14 +1,16 @@
 import firebase from 'firebase';
 
-const config = {
-  apiKey: "AIzaSyC1lpBAYSVOQJalTMjDb9lPRdq2sJX82eg",
-  authDomain: "randompairs-b2705.firebaseapp.com",
-  databaseURL: "https://randompairs-b2705.firebaseio.com",
-  projectId: "randompairs-b2705",
-  storageBucket: "randompairs-b2705.appspot.com",
-  messagingSenderId: "998678564552"
+let config = {
+  apiKey: "AIzaSyAKVhOleqXW-yl9bCzCcEvhno3z0quGCwE",
+  authDomain: "brewtour-66745.firebaseapp.com",
+  databaseURL: "https://brewtour-66745.firebaseio.com",
+  projectId: "brewtour-66745",
+  storageBucket: "brewtour-66745.appspot.com",
+  messagingSenderId: "969813913995"
 };
 const firebaseApp = firebase.initializeApp(config);
+
 export const db = firebaseApp.database();
 export const auth = firebaseApp.auth();
-export const storageKey = 'brew-login-randomlypaired';
+export const storagePic = firebaseApp.storage();
+export const storageKey = 'brew-login-mrwickpk'
