@@ -3,7 +3,7 @@ import { Button, Platform, StatusBar} from 'react-native';
 import { DrawerNavigator, StackNavigator } from 'react-navigation';
 import MyNavScreen from './screens/MyNavScreen';
 import Home from './screens/Home';
-import Drafts from './screens/Drafts';
+import BrewerySearch from './screens/BrewerySearch';
 import SignUp from "./screens/SignUp";
 import SignIn from "./screens/SignIn";
 
@@ -37,16 +37,16 @@ export const SignedIn = DrawerNavigator(
         drawerLabel: "Home",
       }
     },
-    Drafts: {
+    BrewerySearch: {
       path: '/sent',
-      screen: Drafts,
+      screen: BrewerySearch,
       navigationOptions: {
-        drawerLabel: "Drafts",
+        drawerLabel: "Search City and State",
       }
     },
   },
   {
-    initialRouteName: 'Drafts',
+    initialRouteName: 'BrewerySearch',
     contentOptions: {
       activeTintColor: '#e91e63',
       marginTop :  Platform.OS === 'ios' ? 20 : 0,

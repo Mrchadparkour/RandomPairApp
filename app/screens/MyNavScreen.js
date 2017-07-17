@@ -8,6 +8,7 @@ export default class MyNavScreen extends React.Component {
   }
 
   render() {
+    console.info('yes');
     const { navigate } = this.props.navigation;
     const { goBack } = this.props.navigation;
     return(

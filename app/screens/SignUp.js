@@ -17,10 +17,16 @@ export default class SignUp extends React.Component {
    };
  }
 
- onSignUp(event) {
-   event.preventDefault();
+ onSignUp() {
    if (this.validateForm()) {
      auth.createUserWithEmailAndPassword(this.state.email, this.state.pass).then(user => {
+       db.ref().child('users').child(user.uid).set({
+         email: user.email,
+         displayName: this.state.displayName,
+         profileImg:""
+       })
+       db.goOffline();
+       this.props.navigation.navigate('SignedIn');
 
      }).catch(err => this.setState(showErr: err.message));
    }
@@ -42,6 +48,11 @@ export default class SignUp extends React.Component {
         <Card>
         <Text>{this.state.showErr}</Text>
           <TextInput
+            placeholder='Name...'
+            onChangeText={displayName => this.setState({displayName})}
+            value={this.state.displayName}
+          />
+          <TextInput
             placeholder='Email Address...'
             onChangeText={email => this.setState({email})}
             value={this.state.email}
@@ -59,7 +70,7 @@ export default class SignUp extends React.Component {
             value={this.state.passConf}
           />
           <Button backgroundColor="#03A9F4" buttonStyle={{ marginTop: 20 }} onPress={() => this.onSignUp()} title="Create Account" />
-          <Button backgroundColor="transparent" textStyle={{ color: "#bcbec1" }} buttonStyle={{ marginTop: 20 }} onPress={() => navigate('SignIn')} title="Sign Up" />
+          <Button backgroundColor="transparent" textStyle={{ color: "#bcbec1" }} buttonStyle={{ marginTop: 20 }} onPress={() => navigate('SignIn')} title="Login" />
 
         </Card>
       </View>
