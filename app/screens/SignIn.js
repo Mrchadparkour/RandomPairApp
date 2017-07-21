@@ -17,7 +17,7 @@ export default class SignIn extends React.Component {
 
  onSignIn() {
    auth.signInWithEmailAndPassword(this.state.email, this.state.pass).then((user) => {
-     AsyncStorage.setItem(USER_KEY, user.uid);
+     AsyncStorage.setItem('USER_KEY', user.uid);
      this.props.navigation.navigate('SignedIn');
    }).catch(err =>this.setState({showErr:err.message}));
  }

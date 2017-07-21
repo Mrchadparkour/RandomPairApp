@@ -6,6 +6,7 @@ import Home from './screens/Home';
 import BrewerySearch from './screens/BrewerySearch';
 import SignUp from "./screens/SignUp";
 import SignIn from "./screens/SignIn";
+import Map from './screens/map';
 
 const headerStyle = {
   marginTop: Platform.OS === "android" ? StatusBar.currentHeight : 0
@@ -43,6 +44,9 @@ export const SignedIn = DrawerNavigator(
       navigationOptions: {
         drawerLabel: "Search City and State",
       }
+    },
+    MapRes: {
+      screen: Map
     },
   },
   {
